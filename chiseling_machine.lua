@@ -16,7 +16,7 @@ local machine_formspec = "" ..
 
 minetest.register_node(
     "stripped_tree:chiseling_machine", {
-        description = "Chiseladora para troncos",
+        description = "Chiseling machine",
         tiles = {
             "chiseling_machine.png",
             "chiseling_machine.png",
