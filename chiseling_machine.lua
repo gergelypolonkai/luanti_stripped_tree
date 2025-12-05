@@ -1,5 +1,19 @@
 local max_stack = tonumber(minetest.settings:get("default_stack_max")) or 99
 
+-- LuaFormatter off
+local machine_formspec = "" ..
+    "size[8,9]" ..
+    "label[0,0;Chiseling Machine]" ..
+    "image[2,2;1,1;chisel.png]" ..
+    "list[current_name;src;2,1;1,1;]" ..
+    "list[current_name;dst;5,1;2,2;]" ..
+    "list[current_player;main;0,5;8,4;]" ..
+    "listring[current_name;dst]" ..
+    "listring[current_player;main]" ..
+    "listring[current_name;src]" ..
+    "listring[current_player;main]"
+-- LuaFormatter on
+
 minetest.register_node(
     "stripped_tree:chiseling_machine", {
         description = "Chiseladora para troncos",
@@ -15,10 +29,7 @@ minetest.register_node(
 
         after_place_node = function(pos, placer)
             local meta = minetest.get_meta(pos)
-            meta:set_string(
-                "formspec",
-                "size[8,9]label[0,0;Chiseling Machine]image[2,2;1,1;chisel.png]list[current_name;src;2,1;1,1;]list[current_name;dst;5,1;2,2;]list[current_player;main;0,5;8,4;]listring[current_name;dst]listring[current_player;main]listring[current_name;src]listring[current_player;main]"
-            )
+            meta:set_string("formspec", machine_formspec)
         end,
 
         on_construct = function(pos)

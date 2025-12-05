@@ -1,6 +1,9 @@
 stripped_tree = {}
+
 -- Select between chisel tool or axes.
-stripped_tree.ENABLE_CHISEL = core.settings:get_bool "stripped_tree_enable_chisel"
+stripped_tree.ENABLE_CHISEL = core.settings:get_bool("stripped_tree_enable_chisel")
+
+-- Check if we are running on a creative server
 local creative_mode = minetest.settings:get_bool("creative_mode")
 
 -- Function to verify that stripped tree trunk exists
@@ -8,6 +11,7 @@ stripped_tree.has_stripped = function(pos)
     local node = minetest.get_node(pos).name or pos
     local mod_name, node_name = unpack(node:split(":"))
     local has_stripped = minetest.registered_nodes[mod_name .. ":" .. "stripped_" .. node_name]
+
     return has_stripped
 end
 
@@ -15,12 +19,13 @@ end
 stripped_tree.swap_node = function(pos, user, creative_mode)
     local old_node = minetest.get_node(pos)
     local stripped = mod_name .. ":" .. "stripped_" .. node_name
+
     minetest.swap_node(pos, {name = stripped, param2 = old_node.param2})
     -- itemstack:add_wear(65535 / 299) this is not useful at moment.
 
     if not creative_mode then
         local inv = user:get_inventory()
-        -- check for room in inv, if not, drop item
+        -- Check for room in inv, if not, drop item
         if inv:room_for_item("main", "default:tree_bark") then
             inv:add_item("main", {name = "default:tree_bark"})
         else
@@ -29,10 +34,9 @@ stripped_tree.swap_node = function(pos, user, creative_mode)
     end
 
     return itemstack
-
 end
 
--- function to register nodes
+-- Function to register nodes
 function stripped_tree.register_trunk(mod_name, trunk_names)
     for _, name in ipairs(trunk_names) do
         minetest.register_node(
@@ -69,7 +73,7 @@ function stripped_tree.register_trunk(mod_name, trunk_names)
     end
 end
 
--- function to override axes
+-- Function to override axes
 if stripped_tree.ENABLE_CHISEL ~= true then
     function stripped_tree.register_axes(mod_n, axe_types)
         for _, axe_name in ipairs(axe_types) do
@@ -89,7 +93,6 @@ if stripped_tree.ENABLE_CHISEL ~= true then
                         if stripped_tree.has_stripped(pos) then
                             stripped_tree.swap_node(pos, user, creative_mode)
                         end
-
                     end,
                 }
             )

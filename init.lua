@@ -1,14 +1,14 @@
--- get modpath
+-- Get our own path
 local mpath = minetest.get_modpath("stripped_tree")
 
--- load functions
+-- Load functions
 dofile(mpath .. "/functions.lua")
 
--- load default
+-- Load default (AKA the Minetest game)
 dofile(mpath .. "/default.lua")
 dofile(mpath .. "/chiseling_machine.lua")
 
--- load optional dependencies
+-- Load optional dependencies
 if minetest.get_modpath("moretrees") then dofile(mpath .. "/moretrees.lua") end
 
 if minetest.get_modpath("ethereal") then dofile(mpath .. "/ethereal.lua") end
@@ -16,7 +16,6 @@ if minetest.get_modpath("ethereal") then dofile(mpath .. "/ethereal.lua") end
 if minetest.get_modpath("moreores") then dofile(mpath .. "/moreores.lua") end
 
 if stripped_tree.ENABLE_CHISEL then
-
     minetest.register_tool(
         "stripped_tree:chisel", {
             description = "Chisel for tree trunks",
@@ -38,9 +37,11 @@ if stripped_tree.ENABLE_CHISEL then
 
                 local node = minetest.get_node(pos).name
                 local mod_name, node_name = unpack(node:split(":"))
-                -- before concatenating check for nil
+
+                -- Before concatenating check for nil
                 if not mod_name then return end
                 if not node_name then return end
+
                 local has_stripped = minetest.registered_nodes[mod_name .. ":" .. "stripped_" .. node_name]
 
                 if has_stripped then
@@ -49,18 +50,19 @@ if stripped_tree.ENABLE_CHISEL then
 
                     if not minetest.settings:get_bool("creative_mode") then
                         local inv = user:get_inventory()
-                        -- check for room in inv, if not, drop item
+
+                        -- Check for room in inv, if not, drop item
                         if inv:room_for_item("main", "default:tree_bark") then
                             inv:add_item("main", {name = "default:tree_bark"})
                         else
                             minetest.add_item(pos, "default:tree_bark")
                         end
+
                         itemstack:add_wear(65535 / 299) -- 300 uses
                     end
 
                     return itemstack
                 end
-
             end,
         }
     )
