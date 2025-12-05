@@ -1,4 +1,3 @@
-
 unused_args = false
 allow_defined_top = true
 exclude_files = {".luacheckrc"}
@@ -18,6 +17,6 @@ read_globals = {
     -- MTG
     "default", "sfinv", "creative",
 
-    --depends
+    -- Dependencies
     "moretrees", "ethereal", "moreores"
 }

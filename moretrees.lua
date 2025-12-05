@@ -15,12 +15,11 @@ local trunk_names = {
     "rubber_tree_trunk",
     "fir_trunk",
     "jungletree_trunk",
-
 }
 
 stripped_tree.register_trunk(mod_name, trunk_names)
 
--- register tree variations using the same texture as default moretree trunks
+-- Register tree variations using the same texture as default moretree trunks
 
 minetest.register_node(
     ":" .. mod_name .. ":stripped_date_palm_mfruit_trunk", {
