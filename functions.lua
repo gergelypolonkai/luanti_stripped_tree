@@ -16,14 +16,14 @@ stripped_tree.has_stripped = function(pos)
 end
 
 -- Function to swap nodes
-stripped_tree.swap_node = function(pos, user, creative_mode)
+stripped_tree.swap_node = function(pos, user, in_creative_mode)
     local old_node = minetest.get_node(pos)
     local stripped = mod_name .. ":" .. "stripped_" .. node_name
 
     minetest.swap_node(pos, {name = stripped, param2 = old_node.param2})
     -- itemstack:add_wear(65535 / 299) this is not useful at moment.
 
-    if not creative_mode then
+    if not in_creative_mode then
         local inv = user:get_inventory()
 
         -- If the player has room in their inventory for a bark, give them one; otherwise, drop the bark to the ground.
