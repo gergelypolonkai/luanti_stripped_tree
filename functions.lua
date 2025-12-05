@@ -1,7 +1,7 @@
 stripped_tree = {}
 
 -- Select between chisel tool or axes.
-stripped_tree.ENABLE_CHISEL = core.settings:get_bool("stripped_tree_enable_chisel")
+stripped_tree.enable_chisel = core.settings:get_bool("stripped_tree_enable_chisel")
 
 -- Check if we are running on a creative server
 local creative_mode = core.settings:get_bool("creative_mode")
@@ -76,7 +76,7 @@ function stripped_tree.register_trunk(mod_name, trunk_names)
 end
 
 -- Function to override axes
-if stripped_tree.ENABLE_CHISEL ~= true then
+if stripped_tree.enable_chisel ~= true then
     function stripped_tree.register_axes(mod_n, axe_types)
         for _, axe_name in ipairs(axe_types) do
             core.override_item(

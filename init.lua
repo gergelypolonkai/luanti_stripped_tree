@@ -15,7 +15,7 @@ if core.get_modpath("ethereal") then dofile(mpath .. "/ethereal.lua") end
 
 if core.get_modpath("moreores") then dofile(mpath .. "/moreores.lua") end
 
-if stripped_tree.ENABLE_CHISEL then
+if stripped_tree.enable_chisel then
     core.register_tool(
         "stripped_tree:chisel", {
             description = "Chisel for tree trunks",
