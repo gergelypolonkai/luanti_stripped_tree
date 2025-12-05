@@ -3,7 +3,8 @@ allow_defined_top = true
 exclude_files = {".luacheckrc"}
 
 globals = {
-    "minetest",
+    -- This is needed so running luacheck on a single file will recognize it
+    "stripped_tree",
 }
 
 read_globals = {
@@ -11,7 +12,7 @@ read_globals = {
     table = {fields = {"copy", "getn"}},
 
     -- Builtin
-    "vector", "ItemStack",
+    "minetest", "core", "vector", "ItemStack",
     "dump", "DIR_DELIM", "VoxelArea", "Settings",
 
     -- MTG
