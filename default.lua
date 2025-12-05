@@ -41,7 +41,6 @@ if core.get_modpath("bonemeal") then
             recipe = {
                 {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
                 {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
-                {"", "", ""},
             },
         }
     )
