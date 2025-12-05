@@ -4,6 +4,7 @@ allow_defined_top = true
 exclude_files = {".luacheckrc"}
 
 globals = {
+    "core",
     "minetest",
 }
 
