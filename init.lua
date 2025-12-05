@@ -67,9 +67,6 @@ if stripped_tree.ENABLE_CHISEL then
     )
 
     core.register_craft(
-        {
-            output = "stripped_tree:chisel",
-            recipe = {{"", "default:steel_ingot", ""}, {"", "screwdriver:screwdriver", ""}, {"", "", ""}},
-        }
+        {output = "stripped_tree:chisel", recipe = {{"default:steel_ingot"}, {"screwdriver:screwdriver"}}}
     )
 end
