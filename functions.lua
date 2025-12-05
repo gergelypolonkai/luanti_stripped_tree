@@ -17,7 +17,8 @@ end
 
 -- Function to swap nodes
 stripped_tree.swap_node = function(pos, user, in_creative_mode)
-    local old_node = minetest.get_node(pos)
+    local old_node = minetest.get_node(pos).name
+    local mod_name, node_name = unpack(old_node:split(":"))
     local stripped = mod_name .. ":" .. "stripped_" .. node_name
 
     minetest.swap_node(pos, {name = stripped, param2 = old_node.param2})
