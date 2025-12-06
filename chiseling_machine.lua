@@ -1,4 +1,4 @@
-local max_stack = tonumber(minetest.settings:get("default_stack_max")) or 99
+local max_stack = tonumber(core.settings:get("default_stack_max")) or 99
 
 -- LuaFormatter off
 local machine_formspec = "" ..
@@ -14,7 +14,7 @@ local machine_formspec = "" ..
     "listring[current_player;main]"
 -- LuaFormatter on
 
-minetest.register_node(
+core.register_node(
     "stripped_tree:chiseling_machine", {
         description = "Chiseling machine",
         tiles = {
@@ -28,19 +28,19 @@ minetest.register_node(
         groups = {cracky = 1},
 
         after_place_node = function(pos, placer)
-            local meta = minetest.get_meta(pos)
+            local meta = core.get_meta(pos)
             meta:set_string("formspec", machine_formspec)
         end,
 
         on_construct = function(pos)
-            local inv = minetest.get_meta(pos):get_inventory()
+            local inv = core.get_meta(pos):get_inventory()
             inv:set_size("src", 1)
             inv:set_size("dst", 2)
-            minetest.get_node_timer(pos):start(1.0)
+            core.get_node_timer(pos):start(1.0)
         end,
 
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
-            local inv = minetest.get_meta(pos):get_inventory()
+            local inv = core.get_meta(pos):get_inventory()
             local src_stack = inv:get_stack("src", 1)
             local dst_stack = inv:get_stack("dst", 1)
             if listname == "src" and not src_stack:is_empty() then
@@ -48,7 +48,7 @@ minetest.register_node(
                 local src_count = src_stack:get_count()
                 local mod_name, node_name = unpack(src_name:split(":"))
                 local stripped_name = mod_name .. ":stripped_" .. node_name
-                local has_stripped = minetest.registered_nodes[stripped_name]
+                local has_stripped = core.registered_nodes[stripped_name]
                 local dst_count = dst_stack:get_count()
                 if has_stripped and dst_count < max_stack then
                     inv:add_item("dst", stripped_name .. " " .. src_count)
@@ -69,7 +69,7 @@ minetest.register_node(
     }
 )
 
-minetest.register_craft(
+core.register_craft(
     {
         output = "stripped_tree:chiseling_machine",
         recipe = {

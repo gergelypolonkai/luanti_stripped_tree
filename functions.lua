@@ -4,24 +4,24 @@ stripped_tree = {}
 stripped_tree.ENABLE_CHISEL = core.settings:get_bool("stripped_tree_enable_chisel")
 
 -- Check if we are running on a creative server
-local creative_mode = minetest.settings:get_bool("creative_mode")
+local creative_mode = core.settings:get_bool("creative_mode")
 
 -- Function to verify that stripped tree trunk exists
 stripped_tree.has_stripped = function(pos)
-    local node = minetest.get_node(pos).name or pos
+    local node = core.get_node(pos).name or pos
     local mod_name, node_name = unpack(node:split(":"))
-    local has_stripped = minetest.registered_nodes[mod_name .. ":" .. "stripped_" .. node_name]
+    local has_stripped = core.registered_nodes[mod_name .. ":" .. "stripped_" .. node_name]
 
     return has_stripped
 end
 
 -- Function to swap nodes
 stripped_tree.swap_node = function(pos, user, in_creative_mode, tool)
-    local old_node = minetest.get_node(pos).name
+    local old_node = core.get_node(pos).name
     local mod_name, node_name = unpack(old_node:split(":"))
     local stripped = mod_name .. ":" .. "stripped_" .. node_name
 
-    minetest.swap_node(pos, {name = stripped, param2 = old_node.param2})
+    core.swap_node(pos, {name = stripped, param2 = old_node.param2})
     -- itemstack:add_wear(65535 / 299) this is not useful at moment.
 
     if not in_creative_mode then
@@ -31,7 +31,7 @@ stripped_tree.swap_node = function(pos, user, in_creative_mode, tool)
         if inv:room_for_item("main", "default:tree_bark") then
             inv:add_item("main", {name = "default:tree_bark"})
         else
-            minetest.add_item(pos, "default:tree_bark")
+            core.add_item(pos, "default:tree_bark")
         end
     end
 
@@ -41,7 +41,7 @@ end
 -- Function to register nodes
 function stripped_tree.register_trunk(mod_name, trunk_names)
     for _, name in ipairs(trunk_names) do
-        minetest.register_node(
+        core.register_node(
             ":" .. mod_name .. ":stripped_" .. name, {
                 description = "Stripped " .. name,
                 tiles = {
@@ -58,11 +58,11 @@ function stripped_tree.register_trunk(mod_name, trunk_names)
                 },
                 sounds = default.node_sound_wood_defaults(),
                 paramtype2 = "facedir",
-                on_place = minetest.rotate_node,
+                on_place = core.rotate_node,
             }
         )
 
-        minetest.register_craft(
+        core.register_craft(
             {
                 output = mod_name .. ":" .. name,
                 recipe = {
@@ -79,7 +79,7 @@ end
 if stripped_tree.ENABLE_CHISEL ~= true then
     function stripped_tree.register_axes(mod_n, axe_types)
         for _, axe_name in ipairs(axe_types) do
-            minetest.override_item(
+            core.override_item(
                 mod_n .. ":" .. axe_name, {
                     on_place = function(itemstack, user, pointed_thing)
                         if pointed_thing.type ~= "node" then return end
@@ -87,8 +87,8 @@ if stripped_tree.ENABLE_CHISEL ~= true then
                         local pos = pointed_thing.under
                         local pname = user:get_player_name()
 
-                        if minetest.is_protected(pos, pname) then
-                            minetest.record_protection_violation(pos, pname)
+                        if core.is_protected(pos, pname) then
+                            core.record_protection_violation(pos, pname)
                             return
                         end
 

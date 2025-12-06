@@ -12,7 +12,7 @@ read_globals = {
     table = {fields = {"copy", "getn"}},
 
     -- Builtin
-    "minetest", "core", "vector", "ItemStack",
+    "core", "vector", "ItemStack",
     "dump", "DIR_DELIM", "VoxelArea", "Settings",
 
     -- MTG

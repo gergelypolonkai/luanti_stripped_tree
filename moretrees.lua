@@ -21,7 +21,7 @@ stripped_tree.register_trunk(mod_name, trunk_names)
 
 -- Register tree variations using the same texture as default moretree trunks
 
-minetest.register_node(
+core.register_node(
     ":" .. mod_name .. ":stripped_date_palm_mfruit_trunk", {
         description = "Stripped date_palm_fruit_trunk",
         tiles = {
@@ -32,11 +32,11 @@ minetest.register_node(
         groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1},
         sounds = default.node_sound_wood_defaults(),
         paramtype2 = "facedir",
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     }
 )
 
-minetest.register_node(
+core.register_node(
     ":" .. mod_name .. ":stripped_date_palm_ffruit_trunk", {
         description = "Stripped date_palm_fruit_trunk",
         tiles = {
@@ -47,11 +47,11 @@ minetest.register_node(
         groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1},
         sounds = default.node_sound_wood_defaults(),
         paramtype2 = "facedir",
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     }
 )
 
-minetest.register_node(
+core.register_node(
     ":" .. mod_name .. ":stripped_date_palm_fruit_trunk", {
         description = "Stripped date_palm_fruit_trunk",
         tiles = {
@@ -62,11 +62,11 @@ minetest.register_node(
         groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1},
         sounds = default.node_sound_wood_defaults(),
         paramtype2 = "facedir",
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     }
 )
 
-minetest.register_node(
+core.register_node(
     ":" .. mod_name .. ":stripped_rubber_tree_trunk_empty", {
         description = "Stripped date_palm_fruit_trunk",
         tiles = {
@@ -77,6 +77,6 @@ minetest.register_node(
         groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1},
         sounds = default.node_sound_wood_defaults(),
         paramtype2 = "facedir",
-        on_place = minetest.rotate_node,
+        on_place = core.rotate_node,
     }
 )
