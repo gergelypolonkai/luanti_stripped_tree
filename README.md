@@ -4,23 +4,23 @@ Adds stripped tree trunks to minetest.
 
 You can choose between use axes or chisel to get the stripped trees, chisel is enabled by default but you can disable it using the `stripped_tree_enable_chisel` game setting.
 
-if you are using a chisel just left clic on the trunk. if you are using axes you get the stripped log with right clic.
+If you are using a chisel just left click on the trunk. if you are using axes you get the stripped log with right click.
 
-you can get string and paper from bark!
+You can get string and paper from bark.
 
-## Links 
+## Links
 
 * [Github](https://github.com/minefaco/chisel_tree)
-* [Contentdb](https://content.minetest.net/packages/1faco/stripped_tree/)
-* [forums](https://forum.minetest.net/viewtopic.php?p=383571#p383571)
+* [ContentDB](https://content.luanti.org/packages/1faco/stripped_tree/)
+* [Forums](https://forum.luanti.org/viewtopic.php?p=383571#p383571)
 
 ## License
 
 __Code__
 
-by minefaco GPLv3.0 (License for code and media)
+By minefaco GPLv3.0 (License for code and media)
 
-contributed to by wsor4035
+Contributed to by wsor4035
 
 __Assets__
 
