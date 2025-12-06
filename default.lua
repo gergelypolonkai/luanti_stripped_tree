@@ -1,8 +1,5 @@
 -- Register tree bark
-core.register_craftitem(
-    ":default:tree_bark",
-    {description = "Tree bark", inventory_image = "tree_bark.png", groups = {not_in_creative_inventory = 1}}
-)
+core.register_craftitem(":default:tree_bark", {description = "Tree bark", inventory_image = "tree_bark.png"})
 
 -- Register bark as fuel
 core.register_craft({type = "fuel", recipe = "default:tree_bark", burntime = 15})
