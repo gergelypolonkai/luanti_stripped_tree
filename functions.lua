@@ -16,7 +16,7 @@ stripped_tree.has_stripped = function(pos)
 end
 
 -- Function to swap nodes
-stripped_tree.swap_node = function(pos, user, in_creative_mode)
+stripped_tree.swap_node = function(pos, user, in_creative_mode, tool)
     local old_node = minetest.get_node(pos).name
     local mod_name, node_name = unpack(old_node:split(":"))
     local stripped = mod_name .. ":" .. "stripped_" .. node_name
@@ -34,7 +34,7 @@ stripped_tree.swap_node = function(pos, user, in_creative_mode)
         end
     end
 
-    return itemstack
+    return tool
 end
 
 -- Function to register nodes
@@ -92,7 +92,7 @@ if stripped_tree.ENABLE_CHISEL ~= true then
                         end
 
                         if stripped_tree.has_stripped(pos) then
-                            stripped_tree.swap_node(pos, user, creative_mode)
+                            stripped_tree.swap_node(pos, user, creative_mode, itemstack)
                         end
                     end,
                 }
