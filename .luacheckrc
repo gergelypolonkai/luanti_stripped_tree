@@ -5,7 +5,6 @@ exclude_files = {".luacheckrc"}
 
 globals = {
     "core",
-    "minetest",
 }
 
 read_globals = {

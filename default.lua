@@ -1,15 +1,15 @@
 -- Register tree bark
-minetest.register_craftitem(
+core.register_craftitem(
     ":default:tree_bark",
     {description = "Tree bark", inventory_image = "tree_bark.png", groups = {not_in_creative_inventory = 1}}
 )
 
 -- Register bark as fuel
-minetest.register_craft({type = "fuel", recipe = "default:tree_bark", burntime = 15})
+core.register_craft({type = "fuel", recipe = "default:tree_bark", burntime = 15})
 
 -- Register craft for string
-if minetest.get_modpath("farming") then
-    minetest.register_craft(
+if core.get_modpath("farming") then
+    core.register_craft(
         {
             output = "farming:string 4",
             recipe = {
@@ -22,7 +22,7 @@ if minetest.get_modpath("farming") then
 end
 
 -- Register craft for paper
-minetest.register_craft(
+core.register_craft(
     {
         output = "default:paper 8",
         recipe = {
@@ -34,8 +34,8 @@ minetest.register_craft(
 )
 
 -- Register craft for mulch
-if minetest.get_modpath("bonemeal") then
-    minetest.register_craft(
+if core.get_modpath("bonemeal") then
+    core.register_craft(
         {
             output = "bonemeal:mulch 4",
             recipe = {
