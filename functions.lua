@@ -37,41 +37,42 @@ stripped_tree.swap_node = function(pos, user, in_creative_mode, tool)
     return tool
 end
 
--- Function to register nodes
-function stripped_tree.register_trunk(mod_name, trunk_names)
-    for _, name in ipairs(trunk_names) do
-        core.register_node(
-            ":" .. mod_name .. ":stripped_" .. name, {
-                description = "Stripped " .. name,
-                tiles = {
-                    "stripped_" .. mod_name .. "_" .. name .. "_top.png",
-                    "stripped_" .. mod_name .. "_" .. name .. "_top.png",
-                    "stripped_" .. mod_name .. "_" .. name .. ".png",
-                },
-                groups = {
-                    tree = 1,
-                    choppy = 2,
-                    oddly_breakable_by_hand = 1,
-                    flammable = 2,
-                    not_in_creative_inventory = 1,
-                },
-                sounds = default.node_sound_wood_defaults(),
-                paramtype2 = "facedir",
-                on_place = core.rotate_node,
-            }
-        )
+-- Function to register a single strippable trunk
+function stripped_tree.register_strippable_trunk(trunk_name, stripped_tiles)
+    local mod_name, trunk_node = unpack(trunk_name:split(":"))
+    local stripped_name = ":" .. mod_name .. ":stripped_" .. trunk_node
+    stripped_tiles = stripped_tiles or {
+        "stripped_" .. mod_name .. "_" .. trunk_node .. "_top.png",
+        "stripped_" .. mod_name .. "_" .. trunk_node .. "_top.png",
+        "stripped_" .. mod_name .. "_" .. trunk_node .. ".png",
+    }
 
-        core.register_craft(
-            {
-                output = mod_name .. ":" .. name,
-                recipe = {
-                    {"", "default:tree_bark", ""},
-                    {"default:tree_bark", mod_name .. ":stripped_" .. name, "default:tree_bark"},
-                    {"", "default:tree_bark", ""},
-                },
-            }
-        )
-    end
+    core.register_node(
+        stripped_name, {
+            description = "Stripped " .. trunk_node,
+            tiles = stripped_tiles,
+            groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2, not_in_creative_inventory = 1},
+            sounds = default.node_sound_wood_defaults(),
+            paramtype2 = "facedir",
+            on_place = core.rotate_node,
+        }
+    )
+
+    core.register_craft(
+        {
+            output = trunk_name,
+            recipe = {
+                {"", "default:tree_bark", ""},
+                {"default:tree_bark", stripped_name, "default:tree_bark"},
+                {"", "default:tree_bark", ""},
+            },
+        }
+    )
+end
+
+-- Compatibility function from the previous version, able to register multiple stripped tree nodes at once
+function stripped_tree.register_trunk(mod_name, trunk_names)
+    for _, name in ipairs(trunk_names) do stripped_tree.register_strippable_trunk(mod_name .. ":" .. name) end
 end
 
 -- Function to override axes
