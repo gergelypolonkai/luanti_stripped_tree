@@ -1,8 +1,11 @@
 -- Register stripped trees
 local mod_name = "default"
-local trunk_names = {"tree", "jungletree", "aspen_tree", "acacia_tree", "pine_tree"}
 
-stripped_tree.register_trunk(mod_name, trunk_names)
+stripped_tree.register_strippable_trunk("default:tree")
+stripped_tree.register_strippable_trunk("default:jungletree")
+stripped_tree.register_strippable_trunk("default:aspen_tree")
+stripped_tree.register_strippable_trunk("default:acacia_tree")
+stripped_tree.register_strippable_trunk("default:pine_tree")
 
 -- Register axes
 local axe_types = {"axe_wood", "axe_stone", "axe_bronze", "axe_steel", "axe_mese", "axe_diamond"}
