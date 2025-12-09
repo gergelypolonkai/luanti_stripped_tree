@@ -41,14 +41,9 @@ function stripped_tree.register_strippable_trunk(trunk_name, plank_name, strippe
     if stripped_tree.stripped_pairs[trunk_name] then return end
 
     local mod_name, trunk_node = unpack(trunk_name:split(":"))
-    local stripped_name = ":" .. mod_name .. ":stripped_" .. trunk_node
-    local stripped_ingredient_name = stripped_name
+    local stripped_name = "stripped_tree:" .. mod_name .. "_stripped_" .. trunk_node
 
-    -- The leading colon of the stripped name is only required for node registration. For recipe ingredients it must not
-    -- be there.
-    if stripped_ingredient_name:sub(1, 1) == ":" then stripped_ingredient_name = stripped_ingredient_name:sub(2) end
-
-    stripped_tree.stripped_pairs[trunk_name] = stripped_ingredient_name
+    stripped_tree.stripped_pairs[trunk_name] = stripped_name
 
     local trunk_def = core.registered_nodes[trunk_name]
     local stripped_def = table.copy(trunk_def)
@@ -74,7 +69,7 @@ function stripped_tree.register_strippable_trunk(trunk_name, plank_name, strippe
         }
     )
 
-    if plank_name then core.register_craft({output = plank_name .. " 4", recipe = {{stripped_ingredient_name}}}) end
+    if plank_name then core.register_craft({output = plank_name .. " 4", recipe = {{stripped_name}}}) end
 end
 
 -- Compatibility function from the previous version, able to register multiple stripped tree nodes at once

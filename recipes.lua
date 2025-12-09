@@ -1,19 +1,20 @@
 local S = core.get_translator(core.get_current_modname())
 
 -- Register tree bark
-core.register_craftitem(":default:tree_bark", {description = S("Tree bark"), inventory_image = "tree_bark.png"})
+core.register_craftitem("stripped_tree:tree_bark", {description = S("Tree bark"), inventory_image = "tree_bark.png"})
+core.register_alias("default:tree_bark", "stripped_tree:tree_bark")
 
 -- Register bark as fuel
-core.register_craft({type = "fuel", recipe = "default:tree_bark", burntime = 15})
+core.register_craft({type = "fuel", recipe = "stripped_tree:tree_bark", burntime = 15})
 
 -- Register craft for paper
 core.register_craft(
     {
         output = "default:paper 8",
         recipe = {
-            {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
-            {"default:tree_bark", "bucket:bucket_water", "default:tree_bark"},
-            {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
+            {"stripped_tree:tree_bark", "stripped_tree:tree_bark", "stripped_tree:tree_bark"},
+            {"stripped_tree:tree_bark", "bucket:bucket_water", "stripped_tree:tree_bark"},
+            {"stripped_tree:tree_bark", "stripped_tree:tree_bark", "stripped_tree:tree_bark"},
         },
         replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}},
     }
@@ -49,9 +50,9 @@ if core.get_modpath("farming") then
         {
             output = "farming:string 4",
             recipe = {
-                {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
-                {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
-                {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
+                {"stripped_tree:tree_bark", "stripped_tree:tree_bark", "stripped_tree:tree_bark"},
+                {"stripped_tree:tree_bark", "stripped_tree:tree_bark", "stripped_tree:tree_bark"},
+                {"stripped_tree:tree_bark", "stripped_tree:tree_bark", "stripped_tree:tree_bark"},
             },
         }
     )
@@ -65,8 +66,8 @@ if core.get_modpath("bonemeal") then
         {
             output = "bonemeal:mulch 4",
             recipe = {
-                {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
-                {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
+                {"stripped_tree:tree_bark", "stripped_tree:tree_bark", "stripped_tree:tree_bark"},
+                {"stripped_tree:tree_bark", "stripped_tree:tree_bark", "stripped_tree:tree_bark"},
             },
         }
     )
