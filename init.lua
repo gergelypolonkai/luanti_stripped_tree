@@ -1,3 +1,6 @@
+-- Our own mod namespace
+stripped_tree = {}
+
 -- Get our own path
 local mpath = core.get_modpath("stripped_tree")
 

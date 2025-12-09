@@ -1,7 +1,5 @@
 local S = core.get_translator(core.get_current_modname())
 
-stripped_tree = {}
-
 -- Select between chisel tool or axes.
 stripped_tree.enable_chisel = core.settings:get_bool("stripped_tree_enable_chisel")
 
