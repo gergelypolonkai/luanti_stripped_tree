@@ -1,12 +1,11 @@
 local S = core.get_translator(core.get_current_modname())
 
--- Function to verify that stripped tree trunk exists
-stripped_tree.has_stripped = function(pos)
-    local node = core.get_node(pos).name or pos
-    local mod_name, node_name = unpack(node:split(":"))
-    local has_stripped = core.registered_nodes[mod_name .. ":" .. "stripped_" .. node_name]
+stripped_tree.stripped_pairs = {}
 
-    return has_stripped
+function stripped_tree.has_stripped(pos)
+    local node = core.get_node(pos).name
+
+    return stripped_tree.stripped_pairs[node]
 end
 
 -- Function to swap nodes
@@ -14,10 +13,12 @@ end
 -- The third parameter is a placeholder for backwards compatibility
 stripped_tree.swap_node = function(pos, user, _, tool)
     local old_node = core.get_node(pos).name
-    local mod_name, node_name = unpack(old_node:split(":"))
-    local stripped = mod_name .. ":" .. "stripped_" .. node_name
+    local stripped_name = stripped_tree.stripped_pairs[old_node]
 
-    core.swap_node(pos, {name = stripped, param2 = old_node.param2})
+    -- TODO: Maybe we could log an error here
+    if not stripped_name then return end
+
+    core.swap_node(pos, {name = stripped_name, param2 = old_node.param2})
     -- itemstack:add_wear(65535 / 299) this is not useful at moment.
 
     if not core.is_creative_enabled(user:get_player_name()) then
@@ -36,6 +37,9 @@ end
 
 -- Function to register a single strippable trunk
 function stripped_tree.register_strippable_trunk(trunk_name, plank_name, stripped_tiles)
+    -- If we have already registered this trunk there’s no need to do anything
+    if stripped_tree.stripped_pairs[trunk_name] then return end
+
     local mod_name, trunk_node = unpack(trunk_name:split(":"))
     local stripped_name = ":" .. mod_name .. ":stripped_" .. trunk_node
     local stripped_ingredient_name = stripped_name
@@ -43,6 +47,8 @@ function stripped_tree.register_strippable_trunk(trunk_name, plank_name, strippe
     -- The leading colon of the stripped name is only required for node registration. For recipe ingredients it must not
     -- be there.
     if stripped_ingredient_name:sub(1, 1) == ":" then stripped_ingredient_name = stripped_ingredient_name:sub(2) end
+
+    stripped_tree.stripped_pairs[trunk_name] = stripped_ingredient_name
 
     local trunk_def = core.registered_nodes[trunk_name]
     local stripped_def = table.copy(trunk_def)
