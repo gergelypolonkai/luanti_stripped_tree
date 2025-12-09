@@ -15,6 +15,7 @@ core.register_craft(
             {"default:tree_bark", "bucket:bucket_water", "default:tree_bark"},
             {"default:tree_bark", "default:tree_bark", "default:tree_bark"},
         },
+        replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}},
     }
 )
 
