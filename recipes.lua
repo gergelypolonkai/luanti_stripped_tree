@@ -36,16 +36,7 @@ if stripped_tree.enable_chisel then
                     return
                 end
 
-                local node = core.get_node(pos).name
-                local mod_name, node_name = unpack(node:split(":"))
-
-                -- Before concatenating check for nil
-                if not mod_name then return end
-                if not node_name then return end
-
-                local has_stripped = core.registered_nodes[mod_name .. ":" .. "stripped_" .. node_name]
-
-                if has_stripped then
+                if stripped_tree.has_stripped(pos) then
                     stripped_tree.swap_node(pos, user, core.settings:get_bool("creative_mode"), itemstack)
 
                     if not core.settings:get_bool("creative_mode") then
