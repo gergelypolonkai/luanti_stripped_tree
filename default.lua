@@ -9,4 +9,4 @@ stripped_tree.register_strippable_trunk("default:pine_tree", "default:pine_wood"
 
 -- Register axes
 local axe_types = {"axe_wood", "axe_stone", "axe_bronze", "axe_steel", "axe_mese", "axe_diamond"}
-if stripped_tree.axes_strip_trees then stripped_tree.register_axes(mod_name, axe_types) end
+stripped_tree.register_axes(mod_name, axe_types)

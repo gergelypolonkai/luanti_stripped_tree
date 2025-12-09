@@ -95,21 +95,21 @@ function stripped_tree.maybe_strip_trunk(pos, player, tool, wear)
 end
 
 -- Function to override axes
-if stripped_tree.axes_strip_trees then
-    function stripped_tree.register_axes(mod_n, axe_types)
-        for _, axe_name in ipairs(axe_types) do
-            core.override_item(
-                mod_n .. ":" .. axe_name, {
-                    on_place = function(itemstack, user, pointed_thing)
-                        if pointed_thing.type ~= "node" then return end
+function stripped_tree.register_axes(mod_n, axe_types)
+    if stripped_tree.axes_strip_trees ~= true then return end
 
-                        local pos = pointed_thing.under
+    for _, axe_name in ipairs(axe_types) do
+        core.override_item(
+            mod_n .. ":" .. axe_name, {
+                on_place = function(itemstack, user, pointed_thing)
+                    if pointed_thing.type ~= "node" then return end
 
-                        -- TODO: Add wear to the axe, but it should depend on the material maybe?
-                        stripped_tree.maybe_strip_trunk(pos, user, itemstack)
-                    end,
-                }
-            )
-        end
+                    local pos = pointed_thing.under
+
+                    -- TODO: Add wear to the axe, but it should depend on the material maybe?
+                    stripped_tree.maybe_strip_trunk(pos, user, itemstack)
+                end,
+            }
+        )
     end
 end
