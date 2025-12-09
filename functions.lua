@@ -1,8 +1,5 @@
 local S = core.get_translator(core.get_current_modname())
 
--- Select between chisel tool or axes.
-stripped_tree.enable_chisel = core.settings:get_bool("stripped_tree_enable_chisel")
-
 -- Function to verify that stripped tree trunk exists
 stripped_tree.has_stripped = function(pos)
     local node = core.get_node(pos).name or pos
@@ -98,7 +95,7 @@ function stripped_tree.maybe_strip_trunk(pos, player, tool, wear)
 end
 
 -- Function to override axes
-if stripped_tree.enable_chisel ~= true then
+if stripped_tree.axes_strip_trees then
     function stripped_tree.register_axes(mod_n, axe_types)
         for _, axe_name in ipairs(axe_types) do
             core.override_item(

@@ -13,4 +13,4 @@ stripped_tree.register_strippable_trunk("ethereal:palm_trunk", "ethereal:palm_wo
 
 -- Register axes
 local axe_types = {"axe_crystal"}
-if not stripped_tree.enable_chisel then stripped_tree.register_axes(mod_name, axe_types) end
+if stripped_tree.axes_strip_trees then stripped_tree.register_axes(mod_name, axe_types) end

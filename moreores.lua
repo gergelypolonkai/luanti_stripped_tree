@@ -1,4 +1,4 @@
 -- Register axes
 local axe_types = {"axe_mithril", "axe_silver"}
 
-if not stripped_tree.enable_chisel then stripped_tree.register_axes("moreores", axe_types) end
+if stripped_tree.axes_strip_trees then stripped_tree.register_axes("moreores", axe_types) end

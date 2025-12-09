@@ -1,2 +1,4 @@
 # Choose between using axes or chisels to get the stripped trees
-stripped_tree_enable_chisel    (Enable Chisel)    bool true
+stripped_tree_enable_chisel    (Enable Chisel [deprecated])  bool true
+# If axes should be able to strip trees
+stripped_tree_strip_with_axe   (Strip trees with axes)       bool false

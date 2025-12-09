@@ -19,30 +19,26 @@ core.register_craft(
 )
 
 -- Register the chisel tool if it’s enabled in the config
-if stripped_tree.enable_chisel then
-    core.register_tool(
-        "stripped_tree:chisel", {
-            description = S("Chisel for tree trunks"),
-            inventory_image = "chisel.png",
-            wield_image = "chisel.png",
-            sound = {breaks = "default_tool_breaks"},
-            stack_max = 1,
-            on_use = function(itemstack, user, pointed_thing)
-                if pointed_thing.type ~= "node" then return end
+core.register_tool(
+    "stripped_tree:chisel", {
+        description = S("Chisel for tree trunks"),
+        inventory_image = "chisel.png",
+        wield_image = "chisel.png",
+        sound = {breaks = "default_tool_breaks"},
+        stack_max = 1,
+        on_use = function(itemstack, user, pointed_thing)
+            if pointed_thing.type ~= "node" then return end
 
-                local pos = pointed_thing.under
+            local pos = pointed_thing.under
 
-                stripped_tree.maybe_strip_trunk(pos, user, itemstack, 65535 / 299)
+            stripped_tree.maybe_strip_trunk(pos, user, itemstack, 65535 / 299)
 
-                return itemstack
-            end,
-        }
-    )
+            return itemstack
+        end,
+    }
+)
 
-    core.register_craft(
-        {output = "stripped_tree:chisel", recipe = {{"default:steel_ingot"}, {"screwdriver:screwdriver"}}}
-    )
-end
+core.register_craft({output = "stripped_tree:chisel", recipe = {{"default:steel_ingot"}, {"screwdriver:screwdriver"}}})
 
 -- Recipes if the farming mod is loaded
 

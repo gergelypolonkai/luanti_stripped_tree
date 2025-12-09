@@ -2,9 +2,8 @@
 
 Adds stripped tree trunks to minetest.
 
-You can choose between use axes or chisel to get the stripped trees, chisel is enabled by default but you can disable it using the `stripped_tree_enable_chisel` game setting.
-
-If you are using a chisel just left click on the trunk. if you are using axes you get the stripped log with right click.
+Stripping is done with the Chisel tool (`stripped_tree:chisel`).  If the setting `stripped_tree_strip_with_axe` is
+enabled, axes can also be used as their secondary use.
 
 You can get string and paper from bark.
 

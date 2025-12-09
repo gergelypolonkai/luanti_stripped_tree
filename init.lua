@@ -1,5 +1,5 @@
 -- Our own mod namespace
-stripped_tree = {}
+stripped_tree = {axes_strip_trees = core.settings:get_bool("stripped_tree_strip_with_axe")}
 
 -- Get our own path
 local mpath = core.get_modpath("stripped_tree")
