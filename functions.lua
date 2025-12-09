@@ -3,9 +3,6 @@ stripped_tree = {}
 -- Select between chisel tool or axes.
 stripped_tree.enable_chisel = core.settings:get_bool("stripped_tree_enable_chisel")
 
--- Check if we are running on a creative server
-local creative_mode = core.settings:get_bool("creative_mode")
-
 -- Function to verify that stripped tree trunk exists
 stripped_tree.has_stripped = function(pos)
     local node = core.get_node(pos).name or pos
@@ -16,7 +13,9 @@ stripped_tree.has_stripped = function(pos)
 end
 
 -- Function to swap nodes
-stripped_tree.swap_node = function(pos, user, in_creative_mode, tool)
+--
+-- The third parameter is a placeholder for backwards compatibility
+stripped_tree.swap_node = function(pos, user, _, tool)
     local old_node = core.get_node(pos).name
     local mod_name, node_name = unpack(old_node:split(":"))
     local stripped = mod_name .. ":" .. "stripped_" .. node_name
@@ -24,7 +23,7 @@ stripped_tree.swap_node = function(pos, user, in_creative_mode, tool)
     core.swap_node(pos, {name = stripped, param2 = old_node.param2})
     -- itemstack:add_wear(65535 / 299) this is not useful at moment.
 
-    if not in_creative_mode then
+    if not core.is_creative_enabled(user:get_player_name()) then
         local inv = user:get_inventory()
 
         -- If the player has room in their inventory for a bark, give them one; otherwise, drop the bark to the ground.
@@ -98,7 +97,7 @@ if stripped_tree.enable_chisel ~= true then
                         end
 
                         if stripped_tree.has_stripped(pos) then
-                            stripped_tree.swap_node(pos, user, creative_mode, itemstack)
+                            stripped_tree.swap_node(pos, user, itemstack)
                         end
                     end,
                 }

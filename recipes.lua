@@ -37,9 +37,9 @@ if stripped_tree.enable_chisel then
                 end
 
                 if stripped_tree.has_stripped(pos) then
-                    stripped_tree.swap_node(pos, user, core.settings:get_bool("creative_mode"), itemstack)
+                    stripped_tree.swap_node(pos, user, nil, itemstack)
 
-                    if not core.settings:get_bool("creative_mode") then
+                    if not core.is_creative_enabled(pname) then
                         itemstack:add_wear(65535 / 299) -- 300 uses
                     end
 
