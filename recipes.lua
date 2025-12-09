@@ -46,19 +46,9 @@ if stripped_tree.enable_chisel then
                 local has_stripped = core.registered_nodes[mod_name .. ":" .. "stripped_" .. node_name]
 
                 if has_stripped then
-                    local stripped = mod_name .. ":" .. "stripped_" .. node_name
-                    core.swap_node(pos, {name = stripped})
+                    stripped_tree.swap_node(pos, user, core.settings:get_bool("creative_mode"), itemstack)
 
                     if not core.settings:get_bool("creative_mode") then
-                        local inv = user:get_inventory()
-
-                        -- Check for room in inv, if not, drop item
-                        if inv:room_for_item("main", "default:tree_bark") then
-                            inv:add_item("main", {name = "default:tree_bark"})
-                        else
-                            core.add_item(pos, "default:tree_bark")
-                        end
-
                         itemstack:add_wear(65535 / 299) -- 300 uses
                     end
 
