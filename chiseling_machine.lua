@@ -41,6 +41,13 @@ core.register_node(
             core.get_node_timer(pos):start(1.0)
         end,
 
+        can_dig = function(pos)
+            local meta = core.get_meta(pos)
+            local inv = meta:get_inventory()
+
+            return inv:is_empty("dst") and inv:is_empty("src")
+        end,
+
         on_metadata_inventory_put = function(pos, listname, index, stack, player)
             local inv = core.get_meta(pos):get_inventory()
             local src_stack = inv:get_stack("src", 1)
