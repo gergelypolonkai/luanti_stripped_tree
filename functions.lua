@@ -1,3 +1,5 @@
+local S = core.get_translator(core.get_current_modname())
+
 stripped_tree = {}
 
 -- Select between chisel tool or axes.
@@ -49,7 +51,7 @@ function stripped_tree.register_strippable_trunk(trunk_name, plank_name, strippe
 
     local trunk_def = core.registered_nodes[trunk_name]
     local stripped_def = table.copy(trunk_def)
-    stripped_def.description = "Stripped " .. trunk_def.description
+    stripped_def.description = S("Stripped @1", trunk_def.description)
     stripped_def.groups = table.copy(trunk_def.groups)
     stripped_def.groups.not_in_creative_inventory = 1
     stripped_def.tiles = stripped_tiles or {

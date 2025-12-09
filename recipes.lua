@@ -1,5 +1,7 @@
+local S = core.get_translator(core.get_current_modname())
+
 -- Register tree bark
-core.register_craftitem(":default:tree_bark", {description = "Tree bark", inventory_image = "tree_bark.png"})
+core.register_craftitem(":default:tree_bark", {description = S("Tree bark"), inventory_image = "tree_bark.png"})
 
 -- Register bark as fuel
 core.register_craft({type = "fuel", recipe = "default:tree_bark", burntime = 15})
@@ -20,7 +22,7 @@ core.register_craft(
 if stripped_tree.enable_chisel then
     core.register_tool(
         "stripped_tree:chisel", {
-            description = "Chisel for tree trunks",
+            description = S("Chisel for tree trunks"),
             inventory_image = "chisel.png",
             wield_image = "chisel.png",
             sound = {breaks = "default_tool_breaks"},

@@ -1,0 +1,5 @@
+# textdomain: stripped_tree
+Chiseling Machine=
+Stripped @1=
+Tree bark=
+Chisel for tree trunks=

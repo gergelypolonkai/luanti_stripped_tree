@@ -1,9 +1,11 @@
+local S = core.get_translator(core.get_current_modname())
+
 local max_stack = tonumber(core.settings:get("default_stack_max")) or 99
 
 -- LuaFormatter off
 local machine_formspec = "" ..
     "size[8,9]" ..
-    "label[0,0;Chiseling Machine]" ..
+    "label[0,0;" .. core.formspec_escape(S("Chiseling Machine")) .. "]" ..
     "image[2,2;1,1;chisel.png]" ..
     "list[current_name;src;2,1;1,1;]" ..
     "list[current_name;dst;5,1;2,2;]" ..
@@ -16,7 +18,7 @@ local machine_formspec = "" ..
 
 core.register_node(
     "stripped_tree:chiseling_machine", {
-        description = "Chiseling machine",
+        description = S("Chiseling Machine"),
         tiles = {
             "chiseling_machine.png",
             "chiseling_machine.png",
