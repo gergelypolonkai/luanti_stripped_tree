@@ -29,6 +29,11 @@ core.register_tool(
         sound = {breaks = "default_tool_breaks"},
         stack_max = 1,
         on_use = function(itemstack, user, pointed_thing)
+            if pointed_thing.type == "object" then
+                pointed_thing.ref:punch(user, 1.0, { full_punch_interval=1.0}, nil)
+                return user:get_wielded_item()
+            end
+
             if pointed_thing.type ~= "node" then return end
 
             local pos = pointed_thing.under
