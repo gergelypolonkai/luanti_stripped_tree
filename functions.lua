@@ -109,6 +109,16 @@ function stripped_tree.register_axes(mod_n, axe_types)
 
                     -- TODO: Add wear to the axe, but it should depend on the material maybe?
                     stripped_tree.maybe_strip_trunk(pos, user, itemstack)
+
+                    -- Taken from VoxelGarden
+                    local node = core.get_node_or_nil(pos)
+                    if not node then return end
+
+                    local node_def = core.registered_nodes[node.name]
+
+                    if node_def and node_def.on_rightclick then
+                        return node_def.on_rightclick(pos, node, user, itemstack, pointed_thing)
+                    end
                 end,
             }
         )
