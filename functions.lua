@@ -79,6 +79,24 @@ function stripped_tree.register_trunk(mod_name, trunk_names)
     for _, name in ipairs(trunk_names) do stripped_tree.register_strippable_trunk(mod_name .. ":" .. name) end
 end
 
+function stripped_tree.maybe_strip_trunk(pos, player, tool, wear)
+    local player_name = player:get_player_name()
+
+    if core.is_protected(pos, player_name) then
+        core.record_protection_violation(pos, player_name)
+
+        return
+    end
+
+    wear = wear and tonumber(wear)
+
+    if stripped_tree.has_stripped(pos) then
+        stripped_tree.swap_node(pos, player, nil, tool)
+
+        if not core.is_creative_enabled(player_name) and wear and wear ~= 0 then tool:add_wear(wear) end
+    end
+end
+
 -- Function to override axes
 if stripped_tree.enable_chisel ~= true then
     function stripped_tree.register_axes(mod_n, axe_types)
@@ -89,16 +107,9 @@ if stripped_tree.enable_chisel ~= true then
                         if pointed_thing.type ~= "node" then return end
 
                         local pos = pointed_thing.under
-                        local pname = user:get_player_name()
 
-                        if core.is_protected(pos, pname) then
-                            core.record_protection_violation(pos, pname)
-                            return
-                        end
-
-                        if stripped_tree.has_stripped(pos) then
-                            stripped_tree.swap_node(pos, user, itemstack)
-                        end
+                        -- TODO: Add wear to the axe, but it should depend on the material maybe?
+                        stripped_tree.maybe_strip_trunk(pos, user, itemstack)
                     end,
                 }
             )

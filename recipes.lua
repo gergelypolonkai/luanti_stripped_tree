@@ -29,22 +29,10 @@ if stripped_tree.enable_chisel then
                 if pointed_thing.type ~= "node" then return end
 
                 local pos = pointed_thing.under
-                local pname = user:get_player_name()
 
-                if core.is_protected(pos, pname) then
-                    core.record_protection_violation(pos, pname)
-                    return
-                end
+                stripped_tree.maybe_strip_trunk(pos, user, itemstack, 65535 / 299)
 
-                if stripped_tree.has_stripped(pos) then
-                    stripped_tree.swap_node(pos, user, nil, itemstack)
-
-                    if not core.is_creative_enabled(pname) then
-                        itemstack:add_wear(65535 / 299) -- 300 uses
-                    end
-
-                    return itemstack
-                end
+                return itemstack
             end,
         }
     )
