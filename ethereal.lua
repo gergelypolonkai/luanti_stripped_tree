@@ -1,24 +1,16 @@
---Register stripped trees
+-- Register stripped trees
 local mod_name = "ethereal"
-local trunk_names = {
-    "banana_trunk",
-    "birch_trunk",
-    "scorched_tree",
-    "yellow_trunk",
-    "willow_trunk",
-    "redwood_trunk",
-    "sakura_trunk",
-    "frost_tree",
-    "palm_trunk",
-}
 
-stripped_tree.register_trunk(mod_name,trunk_names)
+stripped_tree.register_strippable_trunk("ethereal:banana_trunk")
+stripped_tree.register_strippable_trunk("ethereal:birch_trunk")
+stripped_tree.register_strippable_trunk("ethereal:scorched_tree")
+stripped_tree.register_strippable_trunk("ethereal:yellow_trunk")
+stripped_tree.register_strippable_trunk("ethereal:willow_trunk")
+stripped_tree.register_strippable_trunk("ethereal:redwood_trunk")
+stripped_tree.register_strippable_trunk("ethereal:sakura_trunk")
+stripped_tree.register_strippable_trunk("ethereal:frost_tree")
+stripped_tree.register_strippable_trunk("ethereal:palm_trunk")
 
-
---Register axes
-local axe_types = {
-"axe_crystal",
-}
-if not stripped_tree.ENABLE_CHISEL then
-stripped_tree.register_axes(mod_name,axe_types)
-end
+-- Register axes
+local axe_types = {"axe_crystal"}
+if not stripped_tree.enable_chisel then stripped_tree.register_axes(mod_name, axe_types) end
